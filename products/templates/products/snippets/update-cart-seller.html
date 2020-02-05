@@ -1,0 +1,17 @@
+{% load static %}
+
+<form class='form-product-ajax' method='POST' action='{% url "cart:update-seller" %}' data-endpoint='{% url "cart:update-seller" %}' class="form" {% if request.user.is_authenticated %}data-user='abc'{% endif %}> {% csrf_token %}
+    <input type='hidden' name='product_id' value='{{ product.id }}' {% if  product.is_digital %}data-is-digital='true'{% endif%}/>
+    <input type='hidden' name='product_price' value='{{ soldby.price }}' {% if  product.is_digital %}data-is-digital='true'{% endif%}/>
+      <span class='submit-span'>
+    {% if product in cart.products.all %}
+        <div class='btn-group'> <a class='btn btn-link' href='/cart/'>In cart</a> <button type='submit' class='btn btn-link'>Remove?</button></div>
+    {% else %}
+        {% if type %}
+        <button type='submit' style="border: none; cursor: pointer; background: transparent;"><i class="fa fa-shopping-cart"></i></button>
+        {% else %}
+        <button type='submit' style="border: none!important; color: white;"><a class="btn btn-sm btn-success">Add to Cart</a></button>
+        {% endif %}
+    {% endif %}
+    </span>
+</form>

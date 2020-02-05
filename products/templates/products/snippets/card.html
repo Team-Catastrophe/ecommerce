@@ -1,0 +1,82 @@
+{% load static %}
+                <!-- Start Single Product -->                
+                <div class="col-sm-3 single__pro {{ instance.category.category }} ">
+                    <div class="product foo">
+                        <div class="product__inner">
+                            <div class="pro__thumb">
+                                <a href="{{ instance.get_absolute_url }}">
+                                    <img src="{{ instance.image.url }}" alt="product images">
+                                </a>
+                            </div>
+                            <div class="product__hover__info">
+                                <ul class="product__action">
+                                </a></li>
+                                        <li><a data-toggle="modal" data-target="#{{ instance.id }}" title="Quick View" class="quick-view modal-view detail-link" href="#">open</a></li>
+                                    <li><a title="Add To Cart" href="cart.html">{% include 'products/snippets/update-cart.html' with product=instance cart=cart type=0 %}</a></li>
+                                </ul>
+                            </div>
+                            <div class="add__to__wishlist">
+                                <a data-toggle="tooltip" title="Add To Wishlist" class="add-to-cart" href="wishlist.html"><span class="ti-heart"></span></a>
+                            </div>
+                        </div>
+                        <div class="product__details">
+                            <h2><a href="product-details.html">Simple Black Clock</a></h2>
+                            <ul class="product__price">
+                                <li class="old__price">$16.00</li>
+                                <li class="new__price">$10.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Product -->
+
+<!-- Modal -->
+<div class="modal fade" id="{{ instance.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal__container" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal__header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-product">
+                    <!-- Start product images -->
+                    <div class="product-images">
+                        <div class="main-image images">
+                            <img alt="big images" src="{{ instance.image.url }}">
+                        </div>
+                    </div>
+                    <!-- end product images -->
+                    <div class="product-info">
+                        <h1>{{ instance.title }}</h1>
+                        <div class="rating__and__review">
+                            <ul class="rating">
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                            </ul>
+                            <div class="review">
+                                <a href="#">4 customer reviews</a>
+                            </div>
+                        </div>
+                        <div class="price-box-3">
+                            <div class="s-price-box">
+                                <span class="new-price">Rs. {{ instance.price }}</span>
+                            </div>
+                        </div>
+                        <div class="quick-desc">
+                            {{ instance.description|truncatewords:25 }}
+                        </div>
+                        <div class="addtocart-btn">
+                            {% include 'products/snippets/update-cart.html' with product=instance cart=cart type=0 %}
+                        </div>
+                    </div><!-- .product-info -->
+                </div><!-- .modal-product -->
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div>
+<!-- END Modal -->
+
+                

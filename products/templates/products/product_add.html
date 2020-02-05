@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if request.user.is_authenticated and request.user.is_seller %}
+<div class='row'>
+  <div class='col'>
+  <h3>Why don't you start by adding a product!</h3>
+  </div>
+</div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Add a Product</button>
+  </form>
+{% endif %}
+
+{% endblock %}

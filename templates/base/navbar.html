@@ -1,0 +1,251 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'contact' as contact_url %}
+{% url 'products:list' as product_list_url %}
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+{% url 'register' as register_url %}
+{% url 'map' as map_url %}
+{% url 'account:home' as account_url %}
+{% url 'cart:home' as cart_url %}
+<style>
+.hover-head:hover{
+    color: orange!important;
+}
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<div class="py-1" style="background-color:rgb(243,243,243)">
+    <div class="container">
+      <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+        <div class="col-lg-12 d-block">
+          <div class="row d-flex">
+            <div class="col-md-2 pr-4 d-flex topper align-items-center">
+              <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-phone"></span></div>
+              <span class="text">+ 1235 2355 98</span>
+            </div>
+            <div class="col-md-3 pr-4 d-flex topper align-items-center">
+              <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-envelope"></span></div>
+              <span class="text">ethnicarts@email.com</span>
+            </div>
+            <div class="col-md-4 pr-4 d-flex topper align-items-center text-lg-right">
+              <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+            
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="col-md-3 pr-4 d-flex topper align-items-center text-lg-right">
+              <span class="text">Welcome, <a href="{{ account_url }}" style="color:rgb(90,201,236);text-decoration: underline;">{{ request.user.full_name }}</a></span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        <header id="header" class="htc-header" style="height: 0px!important;">
+          <!-- Start Mainmenu Area -->
+          <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header" style="height: 80px;">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-2 col-lg-2 col-6">
+                          <div class="logo">
+                              <a href="{{ home_url }}">
+                                  <h2 class="hover-head" style="color:rgb(90,201,236)" ><b>Shoppable</b></h2>
+                              </a>
+                          </div>
+                      </div>
+                      <!-- Start MAinmenu Ares -->
+                      <div class="col-md-8 col-lg-8 d-none d-md-block">
+                          <nav class="mainmenu__nav  d-none d-lg-block">
+                              <ul class="main__menu">
+                                  <li class="drop"><a href="{{ home_url }}">Home</a>
+                                  </li>
+                                  <li><a href="{{ product_list_url}}">Products</a></li>
+                                  <li><a href="{{ contact_url }}">Customer support</a></li>
+                                  <li><a href="{{ cart_url }}">Cart</a></li>
+                                  {% if user.is_authenticated %}
+                                  <li class="drop"><a href="{{ account_url}}">My Account</a>
+                                      <ul class="dropdown">
+                                          <li><a href="{{ account_url}}">Home</a></li>
+                                          <li><a href="{{ logout_url}}">Logout</a></li>
+                                      </ul>
+                                  </li>
+                                  {% else %}
+                                  <li><a href="{{ register_url }}">Register</a></li>
+                                  <li><a href="{{ login_url }}">Login</a></li>
+                                  {% endif %}                                  
+                              </ul>
+                          </nav>
+                          
+                          <div class="mobile-menu clearfix d-block d-lg-none">
+                              <nav id="mobile_dropdown">
+                                  <ul>
+                                    <li><a href="{{ home_url }}">Home</a>
+                                    </li>
+                                    <li><a href="{{ product_list_url}}">Products</a></li>
+                                    <li><a href="{{ contact_url }}">Customer support</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="blog.html">My Account</a>
+                                        <ul>
+                                            <li><a href="blog.html">Home</a></li>
+                                            <li><a href="blog-details.html">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{{ register_url }}">Register</a></li>
+                                    <li><a href="{{ login_url }}">Login</a></li>
+                                    {% endif %}
+                                            <ul>
+                                              <li><a href="about.html">about</a></li>
+                                              <li><a href="shop.html">shop</a></li>
+                                              <li><a href="product-details.html">product details</a></li>
+                                              <li><a href="cart.html">cart</a></li>
+                                              <li><a href="wishlist.html">wishlist</a></li>
+                                              <li><a href="checkout.html">checkout</a></li>
+                                              <li><a href="team.html">team</a></li>
+                                              <li><a href="login-register.html">login & register</a></li>
+                                          </ul>
+                                      </li>
+                                      <li><a href="contact.html">contact</a></li>
+                                  </ul>
+                              </nav>
+                          </div>  
+                      </div>
+                      <!-- End MAinmenu Ares -->
+                      <div class="col-md-2 col-lg-2 col-6">  
+                          <ul class="menu-extra">
+                              <li class="search search__open d-none d-sm-block"><span class="ti-search"></span></li>
+                              <li><a href="{{ account_url }}"><span class="ti-user"></span></a></li>
+                              <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
+                              <li class="toggle__menu d-none d-md-block"><span class="ti-menu"></span></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="mobile-menu-area"></div>
+              </div>
+          </div>
+          <!-- End Mainmenu Area -->
+      </header>
+      <!-- End Header Style -->
+<!-- cart/info -->
+<div class="body__overlay"></div>
+<!-- Start Offset Wrapper -->
+<div class="offset__wrapper">
+    <!-- Start Search Popap -->
+    <div class="search__area">
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-12" >
+                    <div class="search__inner">
+                        <form action="{% url "search:query" %}" method="get">
+                            <input placeholder="Search here... " type="text">
+                            <button type="submit"></button>
+                        </form>
+                        <div class="search__close__btn">
+                            <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Search Popap -->
+    <!-- Start Offset MEnu -->
+    <div class="offsetmenu">
+        <div class="offsetmenu__inner">
+            <div class="offsetmenu__close__btn">
+                <a href="#"><i class="zmdi zmdi-close"></i></a>
+            </div>
+            <div class="off__contact">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo/uniqlo.png" alt="logo">
+                    </a>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <ul class="sidebar__thumd">
+                <li><a href="#"><img src="images/sidebar-img/1.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/2.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/3.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/4.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/5.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/6.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/7.jpg" alt="sidebar images"></a></li>
+                <li><a href="#"><img src="images/sidebar-img/8.jpg" alt="sidebar images"></a></li>
+            </ul>
+            <div class="offset__widget">
+                <div class="offset__single">
+                    <h4 class="offset__title">Language</h4>
+                    <ul>
+                        <li><a href="#"> Engish </a></li>
+                        <li><a href="#"> French </a></li>
+                        <li><a href="#"> German </a></li>
+                    </ul>
+                </div>
+                <div class="offset__single">
+                    <h4 class="offset__title">Currencies</h4>
+                    <ul>
+                        <li><a href="#"> USD : Dollar </a></li>
+                        <li><a href="#"> EUR : Euro </a></li>
+                        <li><a href="#"> POU : Pound </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="offset__sosial__share">
+                <h4 class="offset__title">Follow Us On Social</h4>
+                <ul class="off__soaial__link">
+                    <li><a class="bg--twitter" href="https://twitter.com/devitemsllc" target="_blank" title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
+                    
+                    <li><a class="bg--instagram" href="https://www.instagram.com/devitems/" target="_blank" title="Instagram"><i class="zmdi zmdi-instagram"></i></a></li>
+
+                    <li><a class="bg--facebook" href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
+
+                    <li><a class="bg--googleplus" href="https://plus.google.com/" target="_blank" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
+
+                    <li><a class="bg--google" href="#" target="_blank" title="Google"><i class="zmdi zmdi-google"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Offset MEnu -->
+    <!-- Start Cart Panel -->
+    <div class="shopping__cart">
+        <div class="shopping__cart__inner">
+            <div class="offsetmenu__close__btn">
+                <a href="#"><i class="zmdi zmdi-close"></i></a>
+            </div>
+            <div class="shp__cart__wrap">
+                {% for product in cart.products.all %}
+                <div class="shp__single__product">
+                    <div class="shp__pro__thumb">
+                        <a href="#">
+                            <img src="{{ product.image.url }}" alt="product images">
+                        </a>
+                    </div>
+                    <div class="shp__pro__details">
+                        <h2><a href="product-details.html">{{ product.title }}</a></h2>
+                        <span class="quantity">QTY: {{ product.user_quantity }}</span>
+                        <span class="shp__price">$ {{ product.price }}</span>
+                    </div>
+                    <div class="remove__btn">
+                        <a href="#" title="Remove this item">{% include 'carts/snippets/remove-product.html' with product_id=product.id type=0  %}</a>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+            
+            <ul class="shoping__total">
+                <li class="subtotal">Subtotal:</li>
+                <li class="total__price">Rs. {{ cart.subtotal }}</li>
+            </ul>
+            <ul class="shopping__btn">
+                <li><a href="{{ cart_url }}">View Cart</a></li>
+                <li class="shp__checkout"><a href="{% url 'cart:checkout' %}">Checkout</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Cart Panel -->
+</div>
+<!-- End Offset Wrapper -->
+<!-- end of cart/info -->

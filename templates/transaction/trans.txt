@@ -1,0 +1,14 @@
+Here are your recent transaction details :
+
+Order Details:
+
+Order ID    : {{ order_id }}
+Order Total : Rs. {{ total }}
+Card Used   : XXXX XXXX XXXX {{ card }}
+Status      : {{ payment_status }}
+
+Happy Shopping!
+
+Thank you,
+
+Python eCommerce

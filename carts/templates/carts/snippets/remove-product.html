@@ -1,0 +1,10 @@
+<form class='form-product-ajax' method='POST' action='{% url "cart:update" %}' data-endpoint='{% url "cart:update" %}' class="form"> {% csrf_token %}
+    <input class='cart-item-product-id' type='hidden' name='product_id' value='{{ product_id }}' />
+    {% if type %}
+      <button type='submit' class='btn btn-link btn-sm' style="padding:0px;cursor: pointer; color: blue!important; border: none!important;" onclick="document.location.reload(true)">Remove?</button>
+    {% else %}
+    <button type='submit' class='btn btn-link btn-sm' style="padding:0px;cursor: pointer; color: blue!important; border: none!important;" onclick="setTimeout(function(){
+      window.location.reload(1);
+   }, 500);"><i class="zmdi zmdi-close"></i></button>
+    {% endif %}
+</form>

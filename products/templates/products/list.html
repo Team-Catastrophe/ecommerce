@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container"><br>
+<center><h1 style="font-size: 50px;">Products</h1></center><hr>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="product__menu">
+            <button  data-filter="*"  class="is-checked">All</button>
+            {% for category in categories %}
+            <button  data-filter=".{{ category.category }}">{{ category.category  }}</button>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <div class="product__list">
+        <div class="row">
+    {% for obj in object_list %}
+        {% include 'products/snippets/card.html' with instance=obj %}  
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endblock %}

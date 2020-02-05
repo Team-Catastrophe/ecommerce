@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+{% url 'home' as home_url %}
+{% url 'products:list' as product_list_url %}
+
+    <!-- <div class='row'>
+        <div class='col-12 col-md-6'>
+                <h1>{{ object.title }}</h1>
+                {{ object.timestamp|timesince }} ago
+                {{ object.description|linebreaks }}<br/>
+                {% if object.image %}
+                    <img src='{{ object.image.url }}' class='img-fluid' />
+                {% endif %}
+        </div>
+        <div class='col-12 col-md-6'>
+            {% include 'products/snippets/update-cart.html' with product=object cart=cart %}
+
+        </div>
+</div> -->
+
+
+<!-- Product Details Area Start -->
+<!-- <div class="single-product-area section-padding-100 clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url('{{ object.image.url }}');">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img" href="{{ object.image.url }}">
+                                    <img class="d-block w-100" src="{{ object.image.url }}" alt="First slide">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="single_product_desc">
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+                        <p class="product-price">Rs. {{ object.price }}</p>
+                        <h4>{{ object.title }}</h4>
+                        <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p class="avaibility">{{ object.timestamp|timesince }} ago</p>
+                    </div>
+
+                    <div class="short_overview my-5">
+                        <p>{{ object.description|linebreaks|truncatewords:80 }}</p>
+                    </div>
+
+                        {% include 'products/snippets/update-cart.html' with product=object cart=cart type=0 %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="hero-wrap hero-bread" style="background-image: url({% static 'img/bgb.jpg' %});">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="{{ home_url }}">Home</a></span> <span class="mr-2"><a href="{{ product_list_url }}">Product</a></span> <span>{{ object.title }}</span></p>
+          <h1 class="mb-0 bread">{{ object.title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5">
+                <a href="{{ object.image.url }}" class="image-popup"><img src="{{ object.image.url }}" class="img-fluid" alt="Colorlib Template"></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5">
+                <h3>{{ object.title }}</h3>
+                <div class="rating d-flex">
+                        <p class="text-left mr-4">
+                            <a href="#" class="mr-2">5.0</a>
+                            <a href="#"><span class="fa fa-star"></span></a>
+                            <a href="#"><span class="fa fa-star"></span></a>
+                            <a href="#"><span class="fa fa-star"></span></a>
+                            <a href="#"><span class="fa fa-star"></span></a>
+                            <a href="#"><span class="fa fa-star"></span></a>
+                        </p>
+                        <p class="text-left mr-4">
+                            <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+                        </p>
+                        <p class="text-left">
+                            <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+                        </p>
+                    </div>  
+                    <div>
+                        <p>Sold By:</p>
+                        {% for seller in sellers %}
+                        <br>
+                        <div class="row">
+                        <div class="col">
+                        {{ seller.user.full_name }}
+                        {{ seller.price }}
+                        </div>
+                        <div class="col">
+                        {% include 'products/snippets/update-cart-seller.html' with product=object soldby=seller cart=cart type=0 %}
+                        </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                <p class="price"><span>Rs. {{ object.price }}</span></p>
+                <p>{{ object.description|linebreaks|truncatewords:80 }}
+                    </p>
+                    {% if request.user.is_seller %}
+                    <button class="btn btn-dark">Sell This</button>
+                    {% else %}
+                    {% include 'products/snippets/update-cart.html' with product=object cart=cart type=0 %}
+                    {% endif %}
+                </div>
+
+                
+                
+            </div>
+        </div>
+        
+    </section>
+    <div class="container" style="border: 2px solid black; margin-bottom: 20px;">
+        <h3>FAQs</h3>
+        <hr>
+        {% for faqs in faqs %}
+        <B>Q. {{ faqs.question }}</B>
+        <p><span class="fa fa-arrow-right"></span> {{ faqs.answer }}</p>
+        <hr>
+        {% endfor %}
+    </div>
+    <hr>
+    <br>
+    <br>
+    <div class="container py-2 mb-5" style="border: 2px solid black;">
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <center><h3 >Comments</h3><hr></center>
+                <div class="text-center">
+                    {% for comments in comments %}
+                    <p>By: {{comments.user.full_name}}</p>
+                    <span class="fa fa-quote-left"></span><span style="margin-left: 20px; margin-right: 20px;">{{comments.comment}}</span><span class="fa fa-quote-right"></span>
+                    <p>Rating: <b>{{ comments.rating }}</b></p>
+                    <hr>
+                    {% endfor %}
+                </div>
+                <br>
+                <br>
+                <h5>Add a comment</h5>
+                <form  method='POST'>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" class="btn btn-info py-2 px-2">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
